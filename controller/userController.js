@@ -32,7 +32,8 @@ exports.userRegister = async (req, res) => {
         return res.status(400).json({ error: "Something went wrong" })
     }
     // sent verification email
-    const url = `http://localhost:5000/api/emailverification/${token.token}`
+    // const url = `http://localhost:5000/api/emailverification/${token.token}`
+    const url = `${process.env.FRONTEND_URL}/emailVerification/${token.token}`
     sendEmail({
         from: "noreply@example.com",
         to: email,
@@ -94,7 +95,8 @@ exports.resendVerification = async (req, res) => {
         return res.status(400).json({ error: "Something went wrong" })
     }
     // send token in email
-    const url = `http://localhost:5000/api/emailverification/${token.token}`
+    // const url = `http://localhost:5000/api/emailverification/${token.token}`
+    const url = `${process.env.FRONTEND_URL}/emailVerification/${token.token}`
     sendEmail({
         from: "noreply@example.com",
         to: user.email,
@@ -125,7 +127,8 @@ exports.forgetpassword = async (req, res) => {
         return res.status(400).json({ error: "Something went wrong" })
     }
     // send reset link with token in email
-    const url = `http://localhost:5000/api/resetpassword/${token.token}`
+    // const url = `http://localhost:5000/api/resetpassword/${token.token}`
+    const url = `${process.env.FRONTEND_URL}/resetpassword/${token.token}`
     sendEmail({
         from: "noreply@example.com",
         to: user.email,
