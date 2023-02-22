@@ -26,6 +26,10 @@ const productSchema = new mongoose.Schema({
     category: {
         type: ObjectId,
         ref: "Category"
+    },
+    rating: {
+        type: Number,
+        default: 1
     }
 },{timestamps: true})
 
