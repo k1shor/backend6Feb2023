@@ -31,6 +31,38 @@ exports.getAllProducts = async (req, res) => {
     res.send(products)
 }
 
+// to get filtered products
+exports.getFilteredProducts = async (req, res) => {
+    let Args = {}
+    for(var key in req.body.filters){
+        if(req.body.filters[key].length > 0){
+            if(key==='category'){
+                Args[key] = req.body.filters[key]
+            }
+            else{
+                Args[key] = {
+                    $gte: req.body.filters[key][0],
+                    $lte: req.body.filters[key][1]
+                }
+            }
+        }
+    }
+    let products = await Product.find(Args).populate('category','category_name')
+    if(!products){
+        return res.status(400).json({error:"Something went wrong"})
+    }
+    res.send(products)
+}
+/*
+filters: {
+    category: [abc, def, ghi], 
+    product_price: [0,999]
+}
+Args['category'] = [abc, def, ghi]
+Args['product_price'] = [0,1,2,....,999]
+*/
+
+
 // to get products of same category
 exports.getProductsByCategory = async (req, res)=> {
     let products = await Product.find({category: req.params.categoryid})
