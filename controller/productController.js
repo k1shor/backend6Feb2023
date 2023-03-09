@@ -121,3 +121,15 @@ exports.deleteProduct = (req, res) => {
     .catch(err=>res.status(400).json({error:err.message}))
 
 }
+
+// to get related products
+exports.getRelatedProducts = async (req, res) => {
+    let product = await Product.findById(req.params.id)
+    let relatedProducts = await Product.find({
+        category: product.category, 
+        _id: {$ne:product._id}})
+        if(!relatedProducts){
+            return res.status(400).json({error:"SOmething went wrong"})
+        }
+        res.send(relatedProducts)
+}

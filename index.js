@@ -12,6 +12,7 @@ const CategoryRoute = require('./routes/categoryRoute')
 const ProductRoute = require('./routes/productRoute')
 const UserRoute = require('./routes/userRoute')
 const OrderRoute = require('./routes/orderRoute')
+const PaymentRoute = require('./routes/paymentRoute')
 
 const app = express()
 const port = process.env.PORT
@@ -27,6 +28,7 @@ app.use('/api',CategoryRoute)
 app.use('/api', ProductRoute)
 app.use('/api',UserRoute)
 app.use('/api',OrderRoute)
+app.use('/api', PaymentRoute)
 
 app.use('/api/public/uploads', express.static('public/uploads'))
 

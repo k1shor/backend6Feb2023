@@ -1,5 +1,5 @@
 const express = require('express')
-const { addProduct, getAllProducts, getProductsByCategory, getProductDetails, updateProduct, deleteProduct, getFilteredProducts } = require('../controller/productController')
+const { addProduct, getAllProducts, getProductsByCategory, getProductDetails, updateProduct, deleteProduct, getFilteredProducts, getRelatedProducts } = require('../controller/productController')
 const { requireSignin } = require('../controller/userController')
 const upload = require('../utils/fileUpload')
 const { productCheck, validate } = require('../validation/validator')
@@ -13,6 +13,7 @@ router.put('/updateproduct/:id', upload.single('product_image'), requireSignin, 
 router.delete('/deleteproduct/:id', requireSignin, deleteProduct)
 
 router.post('/getfilteredproducts', getFilteredProducts)
+router.get('/getrelatedproducts/:id', getRelatedProducts)
 
 
 module.exports = router
