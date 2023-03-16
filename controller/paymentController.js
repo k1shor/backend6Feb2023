@@ -11,7 +11,7 @@ exports.sendSTRIPEKey = (req, res) => {
 exports.processPayment = async (req, res) => {
     const myPaymentIntents = await stripe.paymentIntents.create({
         amount: req.body.amount,
-        currency: npr,
+        currency: 'npr',
         metadata: {integration_check:"Accept_a_Payment"}
     })
     res.send({client_secret: myPaymentIntents.client_secret})
